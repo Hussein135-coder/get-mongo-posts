@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
     try {
       const posts = await Post.find().sort({ date: -1 }).limit(100);
       console.log(posts);
-      socket.emit("posts", posts);
+      socket.emit("posts", JSON.stringify(posts));
     } catch (err) {
       console.error(err);
     }
