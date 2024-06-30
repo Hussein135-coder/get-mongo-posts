@@ -1,19 +1,20 @@
 const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
+const { createServer } = require("http");
 const mongoose = require("mongoose");
 const Post = require("./models/Post");
 const cors = require("cors");
 require("dotenv").config();
+const { Server } = require("socket.io");
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+app.use(cors());
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {});
 
 const PORT = process.env.PORT || 2000;
 const MONGO_URI = process.env.MONGO;
-
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -45,4 +46,4 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
