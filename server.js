@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   };
 
   // Send posts every 10 seconds
-  const intervalId = setInterval(fetchPosts, 10000);
+  const intervalId = setInterval(fetchPosts, 5000);
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
