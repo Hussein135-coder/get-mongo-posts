@@ -3,12 +3,11 @@ const { Server } = require("socket.io");
 const io = new Server({});
 
 const mongoose = require("mongoose");
+require("dotenv").config();
 const Post = require("./models/Post");
 
 const PORT = process.env.PORT || 8000;
-const MONGO_URI =
-  "mongodb+srv://hussein:hason12345t@syr.yqrf3dh.mongodb.net/?retryWrites=true&w=majority&appName=syr";
-
+const MONGO_URI = process.env.MONGO;
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("MongoDB connected"))
