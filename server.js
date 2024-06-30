@@ -3,6 +3,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 const Post = require("./models/Post");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,8 @@ const io = socketIo(server);
 
 const PORT = process.env.PORT || 2000;
 const MONGO_URI = process.env.MONGO;
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
